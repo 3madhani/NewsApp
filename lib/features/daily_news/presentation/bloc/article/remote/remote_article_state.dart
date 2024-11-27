@@ -8,7 +8,9 @@ abstract class RemoteArticleState extends Equatable {
   List<Object?> get props => [];
 }
 
-class RemoteArticleInitial extends RemoteArticleState {}
+class RemoteArticleInitial extends RemoteArticleState {
+  const RemoteArticleInitial();
+}
 
 class RemoteArticleLoading extends RemoteArticleState {
   const RemoteArticleLoading();

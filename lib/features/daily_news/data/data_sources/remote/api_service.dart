@@ -14,10 +14,10 @@ class ApiService {
       'apiKey': _apiKey,
       if (queryParams != null) ...queryParams,
     };
-
     try {
       final response =
           await _dio.get("$_baseUrl$endPoint", queryParameters: params);
+      print(response.data);
       return response.data;
     } catch (e) {
       throw DioException(

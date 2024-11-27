@@ -7,6 +7,7 @@ environment:
   sdk: ^3.5.4
 
 dependencies:
+  animated_text_kit: ^4.2.2
   cached_network_image: ^3.4.0
   cupertino_icons: ^1.0.8
   dio: ^5.7.0
@@ -49,3 +50,6 @@ flutter:
     - family: Butler
       fonts:
         - asset: assets/fonts/muli/Butler.ttf
+    - family: Horizon
+      fonts:
+        - asset: assets/fonts/Horizon.ttf

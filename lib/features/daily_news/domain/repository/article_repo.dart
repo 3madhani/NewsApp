@@ -5,6 +5,8 @@ import '../entities/article.dart';
 
 abstract class ArticleRepository {
   Future<Either<Failure, List<ArticleEntity>>> getNewsArticles({String? country});
+  Future<Either<Failure, List<ArticleEntity>>> getQueryArticles({required String query});
+
   // Database methods
   Future<List<ArticleEntity>> getSavedArticles();
   Future<void> saveArticle(ArticleEntity article);

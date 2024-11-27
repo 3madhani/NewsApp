@@ -2,7 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:news_app/features/daily_news/domain/repository/article_repo.dart';
 import 'package:news_app/features/daily_news/domain/use_cases/gat_saved_article.dart';
+import 'package:news_app/features/daily_news/domain/use_cases/get_query_article.dart';
 import 'package:news_app/features/daily_news/presentation/bloc/article/remote/remote_article_bloc.dart';
+import 'package:news_app/features/daily_news/presentation/bloc/search/cubit/search_article_cubit.dart';
 
 import 'features/daily_news/data/data_sources/local/app_database.dart';
 import 'features/daily_news/data/data_sources/remote/api_service.dart';
@@ -39,12 +41,14 @@ Future<void> init() async {
 
   // Use cases
   sl.registerSingleton<GetArticleUseCase>(GetArticleUseCase(sl()));
+  sl.registerSingleton<GetQueryArticleUseCase>(GetQueryArticleUseCase(sl()));
   sl.registerSingleton<SaveArticleUseCase>(SaveArticleUseCase(sl()));
   sl.registerSingleton<RemoveArticleUseCase>(RemoveArticleUseCase(sl()));
   sl.registerSingleton<GetSavedArticleUseCase>(GetSavedArticleUseCase(sl()));
 
   // Bloc
   sl.registerFactory<RemoteArticleBloc>(() => RemoteArticleBloc(sl()));
+   sl.registerFactory<SearchArticleCubit>(() => SearchArticleCubit(sl()));
   sl.registerFactory<LocalArticleBloc>(() => LocalArticleBloc(
         sl(),
         sl(),

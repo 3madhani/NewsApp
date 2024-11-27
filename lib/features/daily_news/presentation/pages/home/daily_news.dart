@@ -4,11 +4,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/features/daily_news/presentation/bloc/article/remote/remote_article_event.dart';
 import 'package:news_app/features/daily_news/presentation/pages/saved_article/saved_article.dart';
 import 'package:news_app/features/daily_news/presentation/widgets/article_tile.dart';
+import '../../../../../injection_container.dart';
 import '../../../domain/entities/article.dart';
 import '../../bloc/article/remote/remote_article_bloc.dart';
 import '../../bloc/article/remote/remote_article_state.dart';
+import '../../bloc/search/cubit/search_article_cubit.dart';
 import '../../widgets/country_drop_down.dart';
 import '../article_detail/article_detail.dart';
+import '../search/search_screen.dart';
 
 class DailyNewsScreen extends StatelessWidget {
   const DailyNewsScreen({super.key});
@@ -34,6 +37,23 @@ class DailyNewsScreen extends StatelessWidget {
           ),
         ),
         actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => BlocProvider(
+                      create: (_) => sl<SearchArticleCubit>(),
+                      child: const SearchScreen(),
+                    ),
+                  ),
+                );
+              },
+              icon: const Icon(
+                Icons.search_rounded,
+                color: Colors.black,
+                size: 26,
+              )),
           GestureDetector(
             onTap: () => _onShowSavedArticlesTapped(context),
             child: const Padding(
@@ -43,7 +63,7 @@ class DailyNewsScreen extends StatelessWidget {
                 color: Colors.black,
               ),
             ),
-          )
+          ),
         ],
       ),
       body: BlocBuilder<RemoteArticleBloc, RemoteArticleState>(

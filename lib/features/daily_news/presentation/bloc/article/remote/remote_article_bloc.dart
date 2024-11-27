@@ -6,7 +6,7 @@ import 'remote_article_state.dart';
 class RemoteArticleBloc extends Bloc<RemoteArticleEvent, RemoteArticleState> {
   final GetArticleUseCase _getArticleUseCase;
 
-  RemoteArticleBloc(this._getArticleUseCase)
+  RemoteArticleBloc(this._getArticleUseCase,)
       : super(const RemoteArticleLoading()) {
     on<GetRemoteArticleEvent>(onGetArticles);
   }
@@ -24,4 +24,5 @@ class RemoteArticleBloc extends Bloc<RemoteArticleEvent, RemoteArticleState> {
       (articles) => emit(RemoteArticleDone(articles: articles)),
     );
   }
+
 }

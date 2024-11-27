@@ -106,4 +106,27 @@ class ArticleRepoImpl implements ArticleRepository {
   void dispose() {
     _articleStreamController.close();
   }
+
+  @override
+  Future<Either<Failure, List<ArticleEntity>>> getQueryArticles(
+      {required String query}) async {
+    try {
+      final httpResponse = await _apiService.get(
+        endPoint: 'everything',
+        queryParams: {
+          'q': query, // Default to 'us' if no country is provided
+        },
+      );
+
+      final articles = (httpResponse['articles'] as List)
+          .map((json) => ArticleModel.fromJson(json))
+          .toList();
+      return Right(articles);
+    } catch (e) {
+      if (e is DioException) {
+        return Left(ServerFailure.fromDioError(e));
+      }
+      return Left(ServerFailure(errMessage: e.toString()));
+    }
+  }
 }
